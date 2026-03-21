@@ -17,6 +17,7 @@ interface TaskBarProps {
   percentage: number;
   tasks: Task[];
   onToggleTask: (id: string) => void;
+  onDeleteTask: (id: string) => void;
   onAddTask: () => void;
 }
 
@@ -26,6 +27,7 @@ export function TaskBar({
   percentage,
   tasks,
   onToggleTask,
+  onDeleteTask,
   onAddTask,
 }: TaskBarProps) {
   const groupedTasks = tasks.reduce((acc, task) => {
@@ -75,6 +77,7 @@ export function TaskBar({
                   key={task.id}
                   task={task}
                   onToggle={onToggleTask}
+                  onDelete={onDeleteTask}
                   type={type}
                 />
               ))}

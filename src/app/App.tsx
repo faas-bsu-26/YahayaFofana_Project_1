@@ -58,7 +58,10 @@ function App() {
   useEffect(() => {
     if (tasks.length > 0) {
       localStorage.setItem("work-health-tasks", JSON.stringify(tasks));
+      return;
     }
+
+    localStorage.removeItem("work-health-tasks");
   }, [tasks]);
 
   // Filter tasks based on date and view mode
@@ -99,6 +102,10 @@ function App() {
     setTasks((prev) =>
       prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
     );
+  };
+
+  const handleDeleteTask = (id: string) => {
+    setTasks((prev) => prev.filter((t) => t.id !== id));
   };
 
   const handleAddTask = (type: "workload" | "health") => {
@@ -229,6 +236,7 @@ function App() {
           percentage={workloadPercentage}
           tasks={workloadTasks}
           onToggleTask={handleToggleTask}
+          onDeleteTask={handleDeleteTask}
           onAddTask={() => handleAddTask("workload")}
         />
 
@@ -239,6 +247,7 @@ function App() {
           percentage={healthPercentage}
           tasks={healthTasks}
           onToggleTask={handleToggleTask}
+          onDeleteTask={handleDeleteTask}
           onAddTask={() => handleAddTask("health")}
         />
       </div>
