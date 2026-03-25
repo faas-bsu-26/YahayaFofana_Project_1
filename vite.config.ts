@@ -1,10 +1,9 @@
 import { defineConfig } from 'vite'
-import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig(({ command }) => ({
-  base: command === 'serve' ? '/' : '/YahayaFofana_Project_1/',
+  base: command === 'serve' ? '/' : '/Project_1_Fofana/',
   plugins: [
     // The React and Tailwind plugins are both required for Make, even if
     // Tailwind is not being actively used – do not remove them
@@ -14,7 +13,7 @@ export default defineConfig(({ command }) => ({
   resolve: {
     alias: {
       // Alias @ to the src directory
-      '@': path.resolve(__dirname, './src'),
+      '@': new URL('./src', import.meta.url).pathname,
     },
   },
 
